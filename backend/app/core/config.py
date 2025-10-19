@@ -26,7 +26,7 @@ class Settings(BaseModel):
 
     # --- CORS ---
     cors_origins: str = Field(
-        default=os.getenv("CORS_ORIGINS", "http://localhost:3000"),
+        default=os.getenv("CORS_ORIGINS"),
         description="Liste séparée par des virgules",
     )
     allow_credentials: bool = True
@@ -38,12 +38,11 @@ class Settings(BaseModel):
 
     # --- Base de données ---
     database_url: str = Field(
-        default=os.getenv("DATABASE_URL", "sqlite:///./history_ai.db"),
-        description="Ex: sqlite:///./file.db ou postgresql+psycopg://user:pwd@host:5432/db",
+        default=os.getenv("DATABASE_URL",)
     )
-    db_pool_size: int = int(os.getenv("DB_POOL_SIZE", "5"))
-    db_max_overflow: int = int(os.getenv("DB_MAX_OVERFLOW", "10"))
-    db_pool_timeout: int = int(os.getenv("DB_POOL_TIMEOUT", "30"))
+    db_pool_size: int = int(os.getenv("DB_POOL_SIZE"))
+    db_max_overflow: int = int(os.getenv("DB_MAX_OVERFLOW"))
+    db_pool_timeout: int = int(os.getenv("DB_POOL_TIMEOUT"))
     db_echo: bool = os.getenv("DB_ECHO", "0") in {"1", "true", "True"}
 
     def is_sqlite(self) -> bool:
@@ -72,8 +71,8 @@ class Settings(BaseModel):
 
     # --- IA / Gemini ---
     gemini_api_key: Optional[str] = os.getenv("GEMINI_API_KEY")
-    gemini_model: str = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
-    gemini_timeout_s: int = int(os.getenv("GEMINI_TIMEOUT_S", "60"))
+    gemini_model: str = os.getenv("GEMINI_MODEL")
+    gemini_timeout_s: int = int(os.getenv("GEMINI_TIMEOUT_S"))
 
     def gemini_enabled(self) -> bool:
         return bool(self.gemini_api_key)
