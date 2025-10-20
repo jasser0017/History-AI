@@ -11,7 +11,6 @@ class CardBase(BaseModel):
 
 class CardOut(CardBase):
     id: str
-    #creéation d'un modéle , directement depuis un objet SQLAlchemy
     model_config = ConfigDict(from_attributes=True)
 
     

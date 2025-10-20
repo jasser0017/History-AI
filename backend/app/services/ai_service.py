@@ -109,9 +109,11 @@ Texte :
         return 0.0, f"Erreur lors de l’analyse IA : {str(e)}"
 
 
-
+'''
 if __name__ == "__main__":
     model=_init_gemini()
     p=generate_blog(title="the arabic spring",system_prompt="your an expert historien, please in english",topics=[])
-    p1=copilot_answer(question="quelles sont les raisons de guerre of 1967",,context="Réponds de manière claire et factuelle")
+    p1=copilot_answer(question="quelles sont les raisons de guerre of 1967",context="Réponds de manière claire et factuelle")
     print(p1)
+
+'''
