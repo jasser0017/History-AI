@@ -1,3 +1,42 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+body {
+  @apply bg-bg text-fg transition-colors duration-300;
+}
+
+.dark body {
+  @apply bg-darkbg text-darkfg;
+}
+
+/* Cartes, header et boutons */
+header,
+.card,
+button {
+  @apply transition-colors duration-300;
+}
+
+/* Header clair/sombre */
+header {
+  @apply bg-muted text-fg;
+}
+.dark header {
+  @apply bg-darkcard text-darkfg border-b border-darkborder;
+}
+
+/* Carte claire/sombre */
+.card {
+  @apply bg-white text-fg border border-fg/10 rounded-xl shadow-soft;
+}
+.dark .card {
+  @apply bg-darkcard text-darkfg border-darkborder;
+}
+
+/* Boutons clairs/sombres */
+button {
+  @apply bg-accent text-white hover:opacity-90;
+}
+.dark button {
+  @apply bg-darkaccent text-darkfg;
+}
