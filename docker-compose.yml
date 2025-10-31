@@ -1,0 +1,16 @@
+
+
+services:   # un service est composant de l'application
+  backend:  #le nom de service , a travers lui , on peut lancer ce service , identifier les logs
+    build: ./backend # indique le path ou se trouve le Dockerfile pou construire l'image
+    container_name: history_ai_backend # definit un nom personalisé pour le conteneur 
+    environment:  # defnit les listes de variables d'environnement  disponible sur le conteeur
+      APP_ENV: dev # indique que nous sommes dans un environnement de dévloppement
+      API_V1_PREFIX: /v1 # ca represente le préfix pour l'api
+      CORS_ORIGINS: http://localhost:3000 
+      LOG_LEVEL: INFO
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/app:/app/app:rw #
+    command: ["poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

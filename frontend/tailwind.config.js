@@ -21,8 +21,6 @@ module.exports = {
         darkaccent: "hsl(19 74% 64%)",
         darkborder: "hsl(193 57% 24%)",
         darkcard: "hsl(193 57% 18%)",
-
-
       },
       borderRadius: {
         xl2: "1.25rem",

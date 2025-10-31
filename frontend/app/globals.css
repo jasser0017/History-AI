@@ -21,22 +21,3 @@ button {
 header {
   @apply bg-muted text-fg;
 }
-.dark header {
-  @apply bg-darkcard text-darkfg border-b border-darkborder;
-}
-
-/* Carte claire/sombre */
-.card {
-  @apply bg-white text-fg border border-fg/10 rounded-xl shadow-soft;
-}
-.dark .card {
-  @apply bg-darkcard text-darkfg border-darkborder;
-}
-
-/* Boutons clairs/sombres */
-button {
-  @apply bg-accent text-white hover:opacity-90;
-}
-.dark button {
-  @apply bg-darkaccent text-darkfg;
-}
