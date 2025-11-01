@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useRef } from "react";
-import useAppStore from "@/store/app-store";
+import {useAppStore} from "@/store/app-store";
+import AddCardDialog from "../cards/add-card-dialog";
+
 
 export default function SearchPanel() {
   const { query, setQuery, refresh } = useAppStore();
@@ -20,12 +22,9 @@ export default function SearchPanel() {
         placeholder="Search events by title..."
         className="flex-1 rounded-xl border border-fg/20 px-4 py-2 text-sm text-fg/80 focus:outline-none focus:ring-2 focus:ring-accent/50"
       />
-      <button
-        disabled
-        className="rounded-xl bg-accent px-4 py-2 text-white opacity-80 cursor-not-allowed"
-      >
-        + Add
-      </button>
+      <div className="flex items-center gap-3">
+      <AddCardDialog />
+    </div>
     </section>
   );
 }

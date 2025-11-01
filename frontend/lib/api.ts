@@ -1,5 +1,7 @@
-import { CardSchema, Card, FullCardSchema, FullCard } from "./validators";
+import { CardSchema, Card, FullCardSchema, FullCard,createCardSchema, type  CreateCardInput  } from "./validators";
+
 const API = process.env.NEXT_PUBLIC_API_URL
+
 export async function fetchCards(q?: string): Promise<Card[]> {
     const url = new URL(`${API}/v1/cards`);
     if (q) url.searchParams.set("q", q);
@@ -9,20 +11,13 @@ export async function fetchCards(q?: string): Promise<Card[]> {
     return data.map((c: unknown) => CardSchema.parse(c));
   }
 
-  export async function fetchCardById(id: string): Promise<FullCard> {
+export async function fetchCardById(id: string): Promise<FullCard> {
     const r = await fetch(`${API}/v1/cards/${id}`, { cache: "no-store" });
     if (!r.ok) throw new Error("Carte introuvable");
     return FullCardSchema.parse(await r.json());
   }
 
-  export async function createCard(form: FormData): Promise<Card> {
-    const r = await fetch(`${API}/v1/cards`, { method: "POST", body: form });
-    if (!r.ok) throw new Error("Échec de création");
-    return CardSchema.parse(await r.json());
-  }
-
-
-  export async function aiCopilot(question: string, context: string) {
+export async function aiCopilot(question: string, context: string) {
     const r = await fetch(`${API}/v1/ai/copilot`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -33,7 +28,7 @@ export async function fetchCards(q?: string): Promise<Card[]> {
   }
 
 
-  export async function biasJudge(text: string) {
+export async function biasJudge(text: string) {
     const r = await fetch(`${API}/v1/ai/bias-judge`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -42,3 +37,37 @@ export async function fetchCards(q?: string): Promise<Card[]> {
     if (!r.ok) throw new Error("Bias judge error");
     return (await r.json()) as { bias_score: number; explanation: string };
   }
+
+
+const BASE = `${API}/v1`;
+
+export async function createCard(input: CreateCardInput) {
+  const parsed = createCardSchema.safeParse(input);
+  if (!parsed.success) {
+    const message = parsed.error.issues.map((e) => e.message).join(" et ");
+    throw new Error(message);
+  }
+
+  const { title, systemPrompt, topics} = parsed.data;
+
+  const fd = new FormData();
+  fd.append("title", title);
+  fd.append("system_prompt", systemPrompt);
+  fd.append("topics", topics); 
+  
+ 
+
+  const res = await fetch(`${BASE}/cards`, {
+    method: "POST",
+    body: fd,
+  });
+
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    throw new Error(text || `HTTP ${res.status}`);
+  }
+  return res.json();
+}
+
+
+  

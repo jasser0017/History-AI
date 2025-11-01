@@ -1,9 +1,9 @@
 
 "use client";
 import { useEffect } from "react";
-import SearchPanel from "@//layout/search-panel";
+import SearchPanel from "@/components/layout/search-panel";
 import CardPreview from "@/components/cards/card-preview";
-import useAppStore from "@/store/app-store";
+import {useAppStore} from "@/store/app-store";
 
 function CardSkeleton() {
   return (

@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
 body {
-  @apply bg-bg text-fg transition-colors duration-300;
+  @apply bg-bg text-fg transition-colors duration-300 
 }
 
 .dark body {
@@ -20,4 +22,8 @@ button {
 /* Header clair/sombre */
 header {
   @apply bg-muted text-fg;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
 }

@@ -12,9 +12,10 @@ type State = {
 type Actions = {
   setQuery: (q: string) => void;
   refresh: () => Promise<void>;
+  addCard: (newCard: Card) => void;
 };
 
-const useAppStore = create<State & Actions>((set, get) => ({
+ export const useAppStore = create<State & Actions>((set, get) => ({
   query: "",
   cards: [],
   loading: false,
@@ -30,6 +31,15 @@ const useAppStore = create<State & Actions>((set, get) => ({
       set({ error: e?.message || "Erreur", loading: false });
     }
   },
+  addCard: (newCard) => {
+    set((state) => {
+      const exists = state.cards.some((c) => c.id === newCard.id);
+      if (exists) return state; 
+      return { cards: [newCard, ...state.cards] };
+    });
+  },
+  
 }));
 
-export default useAppStore;
+
+
