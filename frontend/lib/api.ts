@@ -3,6 +3,7 @@ import { CardSchema, Card, FullCardSchema, FullCard,createCardSchema, type  Crea
 const API = process.env.NEXT_PUBLIC_API_URL
 
 export async function fetchCards(q?: string): Promise<Card[]> {
+  await new Promise((r) => setTimeout(r, 1500))
     const url = new URL(`${API}/v1/cards`);
     if (q) url.searchParams.set("q", q);
     const r = await fetch(url.toString(), { cache: "no-store" });
@@ -12,6 +13,7 @@ export async function fetchCards(q?: string): Promise<Card[]> {
   }
 
 export async function fetchCardById(id: string): Promise<FullCard> {
+  await new Promise((r) => setTimeout(r, 1200));
     const r = await fetch(`${API}/v1/cards/${id}`, { cache: "no-store" });
     if (!r.ok) throw new Error("Carte introuvable");
     return FullCardSchema.parse(await r.json());

@@ -1,12 +1,12 @@
-export default function LoadingCardPage() {
-    return (
-      <div className="min-h-screen flex justify-center items-center">
-        <div className="animate-pulse w-[600px] space-y-4">
-          <div className="h-8 w-2/3 bg-gray-300/40 dark:bg-gray-600/40 rounded"></div>
-          <div className="h-4 w-full bg-gray-300/30 dark:bg-gray-600/30 rounded"></div>
-          <div className="h-4 w-5/6 bg-gray-300/30 dark:bg-gray-600/30 rounded"></div>
-        </div>
+export default function Loading() {
+  return (
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[hsl(40,38%,93%)] dark:bg-[hsl(193,57%,10%)] backdrop-blur-sm transition-colors duration-500">
+      <div className="relative w-20 h-20 mb-6">
+        <div className="absolute inset-0 rounded-full border-4 border-[hsl(19,74%,64%)] border-t-transparent animate-spin"></div>
+        <div className="absolute inset-3 rounded-full border-2 border-[hsl(193,57%,27%)] opacity-20 animate-ping"></div>
       </div>
-    );
-  }
+    </div>
+  );
+}
+
   

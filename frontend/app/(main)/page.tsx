@@ -23,10 +23,11 @@ export default function HomePage() {
       <SearchPanel />
       {error && <p className="text-red-600">{error}</p>}
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {loading && cards.length === 0 && (<><CardSkeleton/><CardSkeleton/><CardSkeleton/></>)}
-        {!loading && cards.length === 0 && !error && (
-          <p className="col-span-full text-fg/70">Aucune carte trouvée.</p>
-        )}
+        {loading && cards.length === 0 && (
+  <div className="fixed inset-0 flex items-center justify-center bg-bg/80 dark:bg-darkbg/80 backdrop-blur-sm">
+    <div className="w-16 h-16 border-4 border-accent/30 border-t-accent dark:border-darkaccent/30 dark:border-t-darkaccent rounded-full animate-spin"></div>
+  </div>
+)}
         {cards.map((c) => (<CardPreview key={c.id} card={c} />))}
       </section>
     </div>

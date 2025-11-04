@@ -64,10 +64,19 @@ Inclure: Résumé, Contexte, Chronologie, Acteurs, Conséquences, Lectures sugg�
 
 def copilot_answer(question: str, context: str) -> str:
     model = _init_gemini()
-    user = f"Contexte:\n{context}\n\nQuestion: {question}\nRéponds de manière claire et factuelle."
+    user = f"""Contexte:
+{context}
+
+Question: {question}
+Tu es un assistant de recherche historique.
+- Donne des réponses synthétiques, précises et neutres.
+- Ne fais pas d'introduction ou de conclusion générique.
+- Structure ta réponse sous forme de 3 à 6 points clairs maximum.
+- Utilise du Markdown pour mettre en valeur les concepts importants (**gras**, listes, etc.)."""
     if model:
-        return (model.generate_content(user).text or "").strip() 
+        return (model.generate_content(user).text or "").strip()
     return "(Réponse simulée – fournissez GEMINI_API_KEY pour activer le modèle.)"
+
 
 
 def bias_judge(text: str) -> tuple[float, str]:
